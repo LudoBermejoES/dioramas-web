@@ -50,7 +50,7 @@ h1, h2, h3 { font-weight: 400; text-wrap: balance; }
 .skip { position: absolute; left: var(--gutter); top: -100px; z-index: 10; padding: 12px 16px; background: var(--ink); color: var(--on-ink); font: 13px/1 var(--mono); }
 .skip:focus { top: 12px; }
 
-.masthead, main, .foot { width: min(100% - 2 * var(--gutter), var(--max)); margin-inline: auto; }
+.masthead, main, .foot, .synopsis { width: min(100% - 2 * var(--gutter), var(--max)); margin-inline: auto; }
 
 /* Small print in monospace, like the credit line on every scene. */
 .label, .section-title, .back, .actions, .foot, .warning {
@@ -98,6 +98,12 @@ h1, h2, h3 { font-weight: 400; text-wrap: balance; }
 .scene, .work { position: relative; }
 .stretch::after { content: ""; position: absolute; inset: 0; z-index: 0; }
 .scene:hover .plate img, .work:hover .plate img { transform: translateY(-4px); }
+
+/* ---- Book: synopsis (book.json "synopsis") ---- */
+.synopsis { margin-bottom: clamp(64px, 9vw, 112px); }
+.synopsis p { max-width: 62ch; margin: 0 0 1.1em; color: var(--ink-soft); font-size: clamp(1.0625rem, 1rem + .25vw, 1.1875rem); line-height: 1.6; }
+.synopsis .hook { max-width: 24ch; margin-bottom: .9em; color: var(--ink); font-style: italic; font-size: clamp(1.625rem, 1.2rem + 1.6vw, 2.5rem); line-height: 1.15; text-wrap: balance; }
+.synopsis p:last-child { color: var(--ink); }
 
 /* ---- Book: scenes in chapter order ---- */
 .scenes { display: grid; gap: clamp(56px, 8vw, 96px) 48px; }
