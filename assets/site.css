@@ -1,0 +1,161 @@
+/* dioramas.ludobermejo.es: white paper, ink, one pink (Astilla's crest). The art is the colour. */
+:root {
+  color-scheme: light dark;
+  --paper: #ffffff;      /* must stay pure white: the thumbnails' paper blends into it */
+  --plate: #ffffff;
+  --ink: #141414;
+  --ink-soft: #3d3d3d;
+  --muted: #5e5e5e;      /* 6.4:1 on white */
+  --rule: #e6e6e6;
+  --accent: #b0125b;     /* 6.6:1 on white */
+  --on-ink: #ffffff;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1240px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #121110;
+    --ink: #eeeae4;
+    --ink-soft: #cfcac2;
+    --muted: #a39e96;    /* 7.4:1 on paper */
+    --rule: #2b2927;
+    --accent: #ff70ad;   /* 7.3:1 on paper */
+    --on-ink: #121110;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.0625rem/1.55 var(--serif);
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; height: auto; image-rendering: pixelated; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+a:hover { text-decoration-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 1px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-weight: 400; text-wrap: balance; }
+[role="list"] { list-style: none; margin: 0; padding: 0; }
+
+.vh { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip { position: absolute; left: var(--gutter); top: -100px; z-index: 10; padding: 12px 16px; background: var(--ink); color: var(--on-ink); font: 13px/1 var(--mono); }
+.skip:focus { top: 12px; }
+
+.masthead, main, .foot { width: min(100% - 2 * var(--gutter), var(--max)); margin-inline: auto; }
+
+/* Small print in monospace, like the credit line on every scene. */
+.label, .section-title, .back, .actions, .foot, .warning {
+  font-family: var(--mono);
+  font-size: .8125rem;
+  letter-spacing: .02em;
+}
+.label { color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: .75rem; }
+
+/* ---- Masthead ---- */
+.masthead { padding-block: clamp(24px, 6vw, 96px) clamp(40px, 7vw, 96px); }
+.masthead nav { margin-bottom: clamp(24px, 5vw, 64px); }
+.back { display: inline-flex; align-items: center; gap: .5em; min-height: 44px; color: var(--ink); text-decoration: none; }
+.back::before { content: "←"; }
+.back:hover { text-decoration: underline; text-decoration-color: var(--accent); }
+.masthead h1 {
+  margin: .5rem 0 1.5rem;
+  font-size: clamp(2.5rem, 1.4rem + 5vw, 6.25rem);
+  line-height: .98;
+  letter-spacing: -.025em;
+}
+.book .masthead h1 { max-width: 15ch; }
+.lede { max-width: 36ch; color: var(--ink-soft); font-size: clamp(1.125rem, 1rem + .5vw, 1.375rem); line-height: 1.45; }
+.warning {
+  max-width: 62ch;
+  margin-top: 1.75rem;
+  padding: .25rem 0 .25rem 1rem;
+  border-left: 3px solid var(--accent);
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.warning strong { color: var(--accent); font-weight: 600; }
+
+@media (min-width: 1100px) {
+  .book .masthead { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 64px; }
+  .book .masthead > * { grid-column: 1; }
+  .book .masthead > .intro { grid-column: 2; grid-row: 2 / span 2; align-self: end; padding-bottom: 1.5rem; }
+}
+
+/* ---- Plates: every thumbnail sits on its own sheet of white paper ---- */
+.plate { display: grid; place-items: center; background: var(--plate); }
+.plate img { transition: transform .25s var(--ease); }
+
+/* Card pattern: one stretched link makes the whole card clickable; other links sit above it. */
+.scene, .work { position: relative; }
+.stretch::after { content: ""; position: absolute; inset: 0; z-index: 0; }
+.scene:hover .plate img, .work:hover .plate img { transform: translateY(-4px); }
+
+/* ---- Book: scenes in chapter order ---- */
+.scenes { display: grid; gap: clamp(56px, 8vw, 96px) 48px; }
+.scene { display: grid; align-content: start; gap: .5rem; }
+.scene .plate { margin-bottom: 1rem; }
+.scene .label { display: flex; flex-wrap: wrap; gap: .35rem 1.25rem; }
+.scene-title { font-size: clamp(1.75rem, 1.4rem + 1vw, 2.25rem); line-height: 1.1; letter-spacing: -.01em; }
+.logline { max-width: 46ch; color: var(--ink-soft); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; margin-top: .75rem; }
+.open {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px;
+  background: var(--ink); color: var(--on-ink); text-decoration: none;
+  transition: background-color .2s var(--ease);
+}
+.scene:hover .open, .open:focus-visible { background: var(--accent); color: var(--on-ink); }
+.video {
+  position: relative; z-index: 1;
+  display: inline-flex; align-items: center; gap: .6em; min-height: 44px;
+  text-decoration: underline; text-decoration-color: var(--rule);
+}
+.video:hover { text-decoration-color: var(--accent); }
+.fmt { padding: 1px 5px; border: 1px solid var(--rule); color: var(--muted); font-size: .6875rem; text-decoration: none; display: inline-block; }
+
+@media (min-width: 700px) and (max-width: 1099px) {
+  .scene { grid-template-columns: minmax(0, 460px) minmax(0, 1fr); column-gap: 32px; align-items: start; }
+  .scene .plate { grid-row: 1 / span 5; margin: 0; min-height: 372px; }
+  .scene .label { padding-top: 1.5rem; }
+}
+@media (min-width: 1100px) {
+  .scenes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .scene .plate { min-height: 372px; }
+}
+
+/* ---- Home: masthead on the left, works on the right; the list grows downwards ---- */
+.section-title { padding-top: 1rem; margin-bottom: 1.5rem; border-top: 1px solid var(--rule); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: .75rem; }
+.works { display: grid; gap: clamp(48px, 7vw, 80px); }
+.work { display: grid; gap: .5rem; }
+.work .plate { margin-bottom: 1rem; min-height: 0; }
+.work-title { max-width: 20ch; font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.75rem); line-height: 1.08; letter-spacing: -.015em; }
+.work-title a { text-decoration: none; }
+.work:hover .work-title a, .work-title a:focus-visible { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+@media (min-width: 1000px) {
+  .home { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 64px; width: min(100% - 2 * var(--gutter), var(--max)); margin-inline: auto; }
+  .home > .masthead, .home > main, .home > .foot { width: auto; margin: 0; }
+  .home > .masthead { position: sticky; top: 0; align-self: start; }
+  .home > main { padding-top: clamp(24px, 6vw, 96px); }
+  .home > .foot { grid-column: 1 / -1; margin-top: clamp(72px, 10vw, 128px); }
+  .home .work .plate { justify-self: start; }
+}
+
+/* ---- 404 ---- */
+.links { display: grid; gap: 4px; font-size: 1.25rem; }
+.links a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* ---- Footer ---- */
+.foot { margin-top: clamp(72px, 10vw, 128px); padding: 20px 0 40px; border-top: 1px solid var(--rule); color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+  .scene:hover .plate img, .work:hover .plate img { transform: none; }
+}
