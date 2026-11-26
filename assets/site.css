@@ -1,32 +1,20 @@
-/* dioramas.ludobermejo.es: white paper, ink, one pink (Astilla's crest). The art is the colour. */
+/* dioramas.ludobermejo.es: black paper, light ink, one pink (Astilla's crest). The art is the colour. */
 :root {
-  color-scheme: light dark;
-  --paper: #ffffff;      /* must stay pure white: the thumbnails' paper blends into it */
-  --plate: #ffffff;
-  --ink: #141414;
-  --ink-soft: #3d3d3d;
-  --muted: #5e5e5e;      /* 6.4:1 on white */
-  --rule: #e6e6e6;
-  --accent: #b0125b;     /* 6.6:1 on white */
-  --on-ink: #ffffff;
-  --wash: #faf1f5;       /* warning box tint */
+  color-scheme: dark;
+  --paper: #000000;      /* black, like the dioramas (white was too harsh); thumbnails are blackened to match */
+  --plate: #000000;
+  --ink: #eeeae4;
+  --ink-soft: #cfcac2;
+  --muted: #a39e96;      /* 7.9:1 on black */
+  --rule: #2b2927;
+  --accent: #ff70ad;     /* 7.8:1 on black */
+  --on-ink: #000000;
+  --wash: #1e1519;       /* warning box tint */
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
   --gutter: clamp(16px, 4vw, 48px);
   --max: 1240px;
   --ease: cubic-bezier(.2, .7, .2, 1);
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #121110;
-    --ink: #eeeae4;
-    --ink-soft: #cfcac2;
-    --muted: #a39e96;    /* 7.4:1 on paper */
-    --rule: #2b2927;
-    --accent: #ff70ad;   /* 7.3:1 on paper */
-    --on-ink: #121110;
-    --wash: #1e1519;
-  }
 }
 
 *, *::before, *::after { box-sizing: border-box; }
