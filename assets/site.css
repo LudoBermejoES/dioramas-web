@@ -166,6 +166,7 @@ kbd { display: inline-block; padding: 4px 8px; border: 1px solid var(--muted); b
 /* ---- Home: masthead on the left, works on the right; the list grows downwards ---- */
 .section-title { padding-top: 1rem; margin-bottom: 1.5rem; border-top: 1px solid var(--rule); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: .75rem; }
 .works { display: grid; gap: clamp(48px, 7vw, 80px); }
+.shelf + .shelf { margin-top: clamp(72px, 10vw, 128px); }
 .work { display: grid; gap: .5rem; }
 .work .plate { margin-bottom: 1rem; min-height: 0; }
 .work-title { max-width: 20ch; font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.75rem); line-height: 1.08; letter-spacing: -.015em; }
